@@ -1,3 +1,5 @@
+import os
+
 from security import identity
 from flask import Flask,request
 from flask.json import jsonify
@@ -10,7 +12,7 @@ from resources.store import StoreList,Store
 
 #having the api
 app=Flask(__name__)#creates our app
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL','sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.secret_key = 'jose'
 api=Api(app)
